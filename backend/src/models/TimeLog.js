@@ -17,7 +17,7 @@ const TimeLog = sequelize.define('TimeLog', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Employees',  // Ensure correct plural table name
+            model: 'Employees',  
             key: 'id',
         },
     },
@@ -26,7 +26,7 @@ const TimeLog = sequelize.define('TimeLog', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Customers',  // Ensure correct plural table name
+            model: 'Customers',  
             key: 'id',
         },
     },
@@ -35,7 +35,7 @@ const TimeLog = sequelize.define('TimeLog', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Jobs',  // Ensure correct plural table name
+            model: 'Jobs',  
             key: 'id',
         },
     },
