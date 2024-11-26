@@ -10,10 +10,10 @@ import { validatePhone } from '../middleware/validatePhone.js';
 
 const router = express.Router();
 
-router.post('/customers', validatePhone, createCustomer);
-router.get('/customers', getAllCustomers);
-router.get('/customers/:id', getCustomerById);
-router.put('/customers/:id', validatePhone, updateCustomer);
-router.delete('/customers/:id', deleteCustomerById);
+router.post('/', validatePhone, createCustomer);
+router.get('/', getAllCustomers);
+router.get('/:id', getCustomerById);
+router.put('/:id', validatePhone, updateCustomer);
+router.delete('/:id', deleteCustomerById);
 
 export default router;
