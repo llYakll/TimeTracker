@@ -7,7 +7,7 @@ export const createCustomer = async (req, res, next) => {
         console.log('Customer created');
         res.status(201).json(customer);
     } catch (error) {
-        next(error); // Pass error to error handling middleware
+        next(error); 
     }
 };
 

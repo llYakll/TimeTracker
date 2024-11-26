@@ -1,0 +1,12 @@
+{
+  "name": "timetracker",
+  "version": "1.0.0",
+  "description": "An comprehensive time tracking application for tower technicians.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd backend && npm test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
