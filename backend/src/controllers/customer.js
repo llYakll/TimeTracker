@@ -4,6 +4,11 @@ import Customer from "../models/Customer.js";
 export const createCustomer = async (req, res, next) => {
     try {
         const customer = await Customer.create(req.body);
+        console.log('Customer created');
+        res.status(201).json(customer);
+    } catch (error) {
+        next(error); 
+    }
 };
 
 // Read All Customers (R)
@@ -19,7 +24,7 @@ export const getAllCustomers = async (req, res, next) => {
 
 // Read Customer by ID (R)
 export const getCustomerById = async (req, res, next) => {
-    const customerId = req.params.id; 
+    const customerId = req.params.id;
 
     if (isNaN(customerId)) {
         return res.status(400).json({ message: 'Invalid customer ID' });
@@ -27,15 +32,15 @@ export const getCustomerById = async (req, res, next) => {
 
     try {
         const customer = await Customer.findByPk(customerId);
-            if (customer) {
-                console.log('Customer found');
-                res.status(200).json(customer);
-            } else {
-                res.status(404).json({ message: 'Customer not found' });
-            }
-        } catch (error) {
-            next(error);
+        if (customer) {
+            console.log('Customer found');
+            res.status(200).json(customer);
+        } else {
+            res.status(404).json({ message: 'Customer not found' });
         }
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Update Customer (U)
