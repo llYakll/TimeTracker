@@ -4,11 +4,8 @@
   "description": "An comprehensive time tracking application for tower technicians.",
   "main": "index.js",
   "scripts": {
-    "test-back": "cd backend && npm test",
-    "test-front": "cd frontend && npm test",
-    "install-all": "cd backend && npm install && cd ../frontend && npm install"
+
+    "test": "cd backend && npm test"
   },
   "keywords": [],
-  "author": "Zachary Sullivan",
-  "license": "ISC"
-}
+  "author": "",

@@ -4,11 +4,6 @@ import Customer from "../models/Customer.js";
 export const createCustomer = async (req, res, next) => {
     try {
         const customer = await Customer.create(req.body);
-            console.log('Customer created');
-            res.status(201).json(customer);
-        } catch (error) {
-            next(error); 
-        }
 };
 
 // Read All Customers (R)

@@ -20,26 +20,52 @@ describe('Customer Routes', () => {
         const res = await request(app).post('/api/customers').send(newCustomer);
         expect(res.status).to.equal(201);
         expect(res.body).to.have.property('id');
-        await request(app).delete(`/api/customers/${res.body.id}`);
+        expect(res.body.name).to.equal(newCustomer.name);
+        expect(res.body.email).to.equal(newCustomer.email);
+        expect(res.body.contactName).to.equal(newCustomer.contactName);
+        expect(res.body.contactPhone).to.equal(newCustomer.contactPhone);
+        expect(res.body.contactEmail).to.equal(newCustomer.contactEmail);
+        expect(res.body.createdAt).to.be.a('string');
+
     });
 
     it('should retrieve all customers', async () => {
         const res = await request(app).get('/api/customers');
         expect(res.status).to.equal(200);
         expect(res.body).to.be.an('array');
+        expect(res.body.length).to.be.greaterThan(0);
+        expect(res.body[0]).to.have.property('id');
+        expect(res.body[0]).to.have.property('name');
+        expect(res.body[0]).to.have.property('email');
+        expect(res.body[0]).to.have.property('contactName');
+        expect(res.body[0]).to.have.property('contactPhone');
+        expect(res.body[0]).to.have.property('contactEmail');
+        expect(res.body[0]).to.have.property('createdAt');
+        expect(res.body[0]).to.have.property('updatedAt');
+        
     });
 
     it('should retrieve a specific customer by ID', async () => {
         const res = await request(app).get(`/api/customers/${customerId}`);
         expect(res.status).to.equal(200);
         expect(res.body).to.have.property('id').equal(customerId);
+        expect(res.body).to.have.property('name');
+        expect(res.body).to.have.property('email');
+        expect(res.body).to.have.property('contactName');
+        expect(res.body).to.have.property('contactPhone');
+        expect(res.body).to.have.property('contactEmail');
+        expect(res.body).to.have.property('createdAt');
+        expect(res.body).to.have.property('updatedAt');
+
     });
 
     it('should update a specific customer', async () => {
         const updatedCustomerData = { name: 'Jane Doe' };
         const res = await request(app).put(`/api/customers/${customerId}`).send(updatedCustomerData);
         expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal(updatedCustomerData.name);
+        expect(res.body.name).to.equal('Jane Doe');
+
+    
     });
 
     it('should return 400 for invalid phone number format', async () => {
