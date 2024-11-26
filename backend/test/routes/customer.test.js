@@ -1,11 +1,13 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../src/server.js';
+import sequelize from '../../src/config/database.js';
 
 describe('Customer Routes', () => {
     let customerId;
 
     beforeEach(async () => {
+        await sequelize.sync({ force: true });
         const newCustomer = { name: 'John Doe', email: 'john@example.com', contactName: 'John Contact', contactPhone: '(123) 456-7890', contactEmail: 'contact@example.com' };
         const res = await request(app).post('/api/customers').send(newCustomer);
         customerId = res.body.id;
