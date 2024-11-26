@@ -1,5 +1,6 @@
 import Employee from "../models/Employee.js";
 
+
 export const createEmployee = async (req, res, next) => {
     try {
         const employee = await Employee.create(req.body);
@@ -53,6 +54,10 @@ export const updateEmployee = async (req, res, next) => {
         } else {
             res.status(404).json({ message: 'Employee not found' });
         }
+
+        const updatedEmployee = await Employee.findByPk(req.params.id);
+        console.log('Employee updated');
+        res.status(200).json(updatedEmployee);
     } catch (error) {
         next(error);
     }
