@@ -1,5 +1,15 @@
 import express from 'express';
-import { createJob, getAllJobs, getJobById, updateJob, deleteJobById } from '../controllers/job.js';
+import { createJob,
+         getAllJobs,
+         getJobById,
+         updateJob,
+         deleteJobById, 
+         getEmployeesByJob, 
+         getJobsByEmployeeName, 
+         getJobsByCustomerName,
+         addEmployeeToJob, 
+         removeEmployeeFromJobByName
+        } from '../controllers/job.js';
 
 const jobRouter = express.Router(); // Explicitly named router so if used elsewhere it is clear what it is.
 
@@ -14,5 +24,6 @@ jobRouter.get('/jobs/:id/timelogs', getTimelogsByJob)
 jobRouter.get('/jobs/customers/:customerName', getJobsByCustomerName)
 jobRouter.put('/jobs/:id', updateJob); 
 jobRouter.delete('/jobs/:id', deleteJobById);
+jobRouter.delete('/jobs/:id/employees/:firstName/:lastName', removeEmployeeFromJobByName)
 
 export default jobRouter; 
