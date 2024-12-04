@@ -1,12 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 
-/*
-This is the employee model for the time tracking database.
-This model has employee details and designates whether or not 
-the account is an admin account.
-*/
-
 const Employee = sequelize.define('Employee', {
     id: {
         type: DataTypes.INTEGER,
@@ -37,12 +31,14 @@ const Employee = sequelize.define('Employee', {
     },
 });
 
-// RELATIONSHIP
 Employee.associate = (models) => {
     Employee.belongsToMany(models.Job, {
         through: 'EmployeeJob',
         foreignKey: 'employeeId',
         otherKey: 'jobId',
+    });
+    Employee.hasMany(models.TimeLog, {
+        foreignKey: 'employeeId',
     });
 };
 

@@ -1,11 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 
-/*
-This is the job model for the time tracking database.
-This model has job details, including structure information and customer association.
-*/
-
 const Job = sequelize.define('Job', {
     id: {
         type: DataTypes.INTEGER,
@@ -15,33 +10,33 @@ const Job = sequelize.define('Job', {
     title: {
         type: DataTypes.STRING,
         allowNull: false,
-        comment: 'Title of the job',
     },
     description: {
         type: DataTypes.STRING,
         allowNull: true,
-        comment: 'Description of the job',
     },
     customerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        comment: 'ID of the customer associated with the job',
+        references: {
+            model: 'Customers',
+            key: 'id',
+        },
     },
     structureType: {
         type: DataTypes.ENUM('Self-Supporting', 'Guyed', 'Monopole', 'Non-Standard'),
         allowNull: false,
-        comment: 'Type of structure',
     },
     structureHeight: {
-        type: DataTypes.INTEGER, 
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     jobType: {
-        type: DataTypes.ENUM('Install', 'Decomission', 'Maintnance'),
+        type: DataTypes.ENUM('Install', 'Decomission', 'Maintenance'),
         allowNull: false,
     },
     mileage: {
-        type: DataTypes.INTEGER, 
+        type: DataTypes.INTEGER,
         allowNull: true,
     },
     location: {
@@ -50,7 +45,6 @@ const Job = sequelize.define('Job', {
     },
 });
 
-// RELATIONSHIPS
 Job.associate = (models) => {
     Job.belongsToMany(models.Employee, {
         through: 'EmployeeJob',
@@ -59,6 +53,9 @@ Job.associate = (models) => {
     });
     Job.belongsTo(models.Customer, {
         foreignKey: 'customerId',
+    });
+    Job.hasMany(models.TimeLog, {
+        foreignKey: 'jobId',
     });
 };
 

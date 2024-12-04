@@ -1,11 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 
-/*
-This is the customer model for the time tracking database.
-This model has customer details and contact information.
-*/
-
 const Customer = sequelize.define('Customer', {
     id: {
         type: DataTypes.INTEGER,
@@ -25,7 +20,7 @@ const Customer = sequelize.define('Customer', {
         allowNull: false,
     },
     contactPhone: {
-        type: DataTypes.STRING, 
+        type: DataTypes.STRING,
         allowNull: false,
     },
     contactEmail: {
@@ -34,11 +29,13 @@ const Customer = sequelize.define('Customer', {
     }
 });
 
-// RELATIONSHIPS
 Customer.associate = (models) => {
     Customer.hasMany(models.Job, {
         foreignKey: 'customerId',
         as: 'jobs'
+    });
+    Customer.hasMany(models.TimeLog, {
+        foreignKey: 'customerId',
     });
 };
 

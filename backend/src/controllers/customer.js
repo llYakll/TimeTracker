@@ -43,6 +43,30 @@ export const getCustomerById = async (req, res, next) => {
     }
 };
 
+//Read Customer Jobs (R)
+export const getCustomerJobs = async (req, res, next) => {
+    try {
+        const customerId = req.params.id;
+
+        const customer = await Customer.findByPk(customerId, {
+            include: [
+                {
+                    model: Job,
+                    as: 'jobs'
+                }
+            ]
+        });
+
+        if (!customer) {
+            return res.status(404).json({ message: 'Customer not found' });
+        }
+
+        res.status(200).json(customer.jobs);
+    } catch (error) {
+        next(error);
+    }
+};
+
 // Update Customer (U)
 export const updateCustomer = async (req, res, next) => {
     if (Object.keys(req.body).length === 0) {

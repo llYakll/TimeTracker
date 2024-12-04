@@ -1,4 +1,4 @@
-import TimeLog from "../models/TimeLog";
+import TimeLog from "../models/timeLog.js";
 
 // Create TimeLog (C)
 export const createTimeLog = async (req, res) => {

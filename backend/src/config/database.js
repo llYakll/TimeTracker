@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
 //first i need to load the env variables
-dotenv.config('./../.env');
+dotenv.config();
 
 
 //verify that the env variables are loaded
